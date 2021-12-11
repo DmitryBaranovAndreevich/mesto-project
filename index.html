@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body>
+  <div class="page">
+    <!-- header -->
+    <section class="header">
+      <img src="./images/mesto-logo.svg" alt="Место действия Россия." class="header__logo">
+      <div class="header__line"></div>
+    </section>
+    <!-- /header -->
+
+    <!-- section profile -->
+    <main class="content">
+      <section class="profile">
+        <img src="./images/kusto.jpg" alt="" class="profile__image">
+        <div class="profile__container">
+          <p class="profile__user-name">Жак-Ив Кусто</p>
+          <button class="profile__button-edit"><img src="./images/edit-icon.svg" alt="Редактировать"
+              class="profile__edit-icon"></button>
+        </div>
+        <p class="profile__user-profession">Исследователь океана</p>
+        <button class="profile__button-add"><img src="./images/add-icon.svg" alt="Добавить фото"
+            class="profile__add-icon"></button>
+      </section>
+      <!-- /section profile -->
+
+      <!-- section elements -->
+      <section class="elements">
+        <ul class="elements__list">
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Карачаевск</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Гора Эльбрус</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Домбай</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Гора Эльбрус</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Домбай</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="elements__element">
+            <figure class="elements__item">
+              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
+              <figcaption class="elemnets__image-title">
+                <p class="elements__title">Карачаево-Ч...</p>
+                <div class="like-icon">
+                  <button class="like-icon__button"><img src="./images/like-icon_inactive.svg"
+                      alt="Лайкос, если нравиться" class="like-icon__image-inactive"></button>
+                  <img src="./images/like-icon_active.svg" alt="" class="like-icon__image-active">
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+      <!-- /section elements -->
+    </main>
+    <!-- section footer -->
+    <footer class="footer">
+      <p class="footer__text">&copy; 2020 Mesto Russia</p>
+    </footer>
+    <!-- /section footer -->
+
+    <!-- section edit-form -->
+    <section class="edit-form">
+      <div class="edit-form__container">
+        <button class="edit-form__close-button" type="button"><img src="./images/сlose Icon.svg" alt="Закрыть"
+            class="edit-form__close-icon"></button>
+        <form action="" class="edit-form__form">
+          <h2 class="edit-form__title">Редактировать профиль</h2>
+          <input class="edit-form__text-field" type="text" placeholder="Ваше имя">
+          <div class="edit-form__line"></div>
+          <input class="edit-form__text-field" type="text" placeholder="Чем занимаетесь?">
+          <div class="edit-form__line"></div>
+          <button class="edit-form__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+    <!-- /section edit-form -->
+  </div>
+</body>
+
+</html>

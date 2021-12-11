@@ -1,0 +1,15 @@
+.elements__image {
+  position: relative;
+  width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}
+
+.elements__image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c4c4c4;
+}

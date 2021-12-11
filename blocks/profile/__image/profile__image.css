@@ -1,0 +1,13 @@
+.profile__image {
+  grid-area: image;
+  max-width: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 720px) {
+  .profile__image {
+    margin-right: 0;
+  }
+}

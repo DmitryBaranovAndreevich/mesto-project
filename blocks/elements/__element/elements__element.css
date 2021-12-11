@@ -1,0 +1,7 @@
+.elements__element {
+  flex-basis: 282px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}

@@ -1,0 +1,15 @@
+.profile__container {
+  grid-area: name-edit;
+  display: flex;
+  align-items: baseline;
+}
+
+.profile__container::before, .profile__container::after {
+  content: "_";
+  visibility: hidden; 
+  font-size: 0.5px; 
+  height: 100%; 
+  width: 0.1px; 
+  display: grid;
+  align-items: end;
+}

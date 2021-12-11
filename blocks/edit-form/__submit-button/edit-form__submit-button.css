@@ -1,0 +1,16 @@
+.edit-form__submit-button {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 14px 0;
+  font: 18px/22px 'Inter', sans-serif;
+  font-weight: 400;
+  margin: 18px 0 37px;
+  border: none;
+  transition: opacity .4s;
+}
+
+.edit-form__submit-button:hover {
+  opacity: .8;
+}

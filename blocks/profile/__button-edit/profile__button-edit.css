@@ -1,0 +1,12 @@
+.profile__button-edit {
+  background-color: #000;
+  border: none;
+  margin: 0 0 0 18px;
+  padding: 0; 
+  vertical-align: text-bottom;
+  transition: opacity .4s;
+}
+
+.profile__button-edit:hover {
+  opacity: .7;
+}
