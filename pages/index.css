@@ -31,10 +31,8 @@
 @import url(../blocks/elements/__image/elements__image.css);
 @import url(../blocks/elements/__image-title/elemnets__image-title.css);
 @import url(../blocks/elements/__element/elements__element.css);
-@import url(../blocks/like-icon/like-icon.css);
-@import url(../blocks/like-icon/__image-inactive/like-icon__image-inactive.css);
-@import url(../blocks/like-icon/__image-active/like-icon__image-active.css);
-@import url(../blocks/like-icon/__button/like-icon__button.css);
+@import url(../blocks/elements/__like-button/elements__like-button.css);
+@import url(../blocks/elements/__like-button/_position/elements__like-button_position_activ.css);
 /* --/section elements-- */
 
 /* --section footer-- */

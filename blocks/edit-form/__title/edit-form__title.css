@@ -3,4 +3,13 @@
   font-weight: 900;
   margin: 34px 0 49px;
   color: #000;
- }
+}
+
+ @media screen and (max-width: 450px) {
+  .edit-form__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 25px;
+    margin-bottom: 73px;
+  } 
+}

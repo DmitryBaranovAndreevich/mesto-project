@@ -1,5 +1,9 @@
 .elements__title {
+  width: 80%;
   font: 24px/29px 'Inter', 'Arial', sans-serif;
   font-weight: 900;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

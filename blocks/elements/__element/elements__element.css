@@ -1,4 +1,5 @@
 .elements__element {
+  box-sizing: border-box;
   flex-basis: 282px;
   border: 1px solid transparent;
   border-radius: 10px;
