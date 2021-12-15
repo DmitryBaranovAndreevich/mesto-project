@@ -14,24 +14,21 @@
 <body>
   <div class="page">
     <!-- header -->
-    <section class="header">
+    <header class="header">
       <img src="./images/mesto-logo.svg" alt="Место действия Россия." class="header__logo">
-      <div class="header__line"></div>
-    </section>
+    </header>
     <!-- /header -->
 
     <!-- section profile -->
     <main class="content">
       <section class="profile">
-        <img src="./images/kusto.jpg" alt="" class="profile__image">
+        <img src="./images/kusto.jpg" alt="Фото лица поьлзователя." class="profile__image">
         <div class="profile__container">
-          <p class="profile__user-name">Жак-Ив Кусто</p>
-          <button class="profile__button-edit"><img src="./images/edit-icon.svg" alt="Редактировать"
-              class="profile__edit-icon"></button>
+          <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+          <button class="profile__button-edit" type="button"></button>
         </div>
         <p class="profile__user-profession">Исследователь океана</p>
-        <button class="profile__button-add"><img src="./images/add-icon.svg" alt="Добавить фото"
-            class="profile__add-icon"></button>
+        <button class="profile__button-add" type="button"></button>
       </section>
       <!-- /section profile -->
 
@@ -39,58 +36,58 @@
       <section class="elements">
         <ul class="elements__list">
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Карачаевск</p>
-                <button class="elements__like-button elements__like-button_position_activ"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Карачаевск</h3>
+                <button class="item__like-button item__like-button_activ" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Гора Эльбрус</p>
-                <button class="elements__like-button"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Гора Эльбрус</h3>
+                <button class="item__like-button" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Домбай</p>
-                <button class="elements__like-button"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Домбай</h3>
+                <button class="item__like-button" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Гора Эльбрус</p>
-                <button class="elements__like-button"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Гора Эльбрус</h3>
+                <button class="item__like-button" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Домбай</p>
-                <button class="elements__like-button"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Домбай</h3>
+                <button class="item__like-button" type="button"></button>
+              </div>
+            </article>
           </li>
           <li class="elements__element">
-            <figure class="elements__item">
-              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="elements__image">
-              <figcaption class="elemnets__image-title">
-                <p class="elements__title">Карачаево-Черкесия</p>
-                <button class="elements__like-button"></button>
-              </figcaption>
-            </figure>
+            <article class="item">
+              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="item__image">
+              <div class="item__image-title">
+                <h3 class="item__title">Карачаево-Черкесия</h3>
+                <button class="item__like-button" type="button"></button>
+              </div>
+            </article>
           </li>
         </ul>
       </section>
@@ -102,22 +99,19 @@
     </footer>
     <!-- /section footer -->
 
-    <!-- section edit-form -->
-    <section class="edit-form">
-      <div class="edit-form__container">
-        <button class="edit-form__close-button" type="button"><img src="./images/сlose-icon.svg" alt="Закрыть"
-            class="edit-form__close-icon"></button>
-        <form class="edit-form__form">
-          <h2 class="edit-form__title">Редактировать профиль</h2>
-          <input class="edit-form__text-field" type="text" placeholder="Ваше имя">
-          <div class="edit-form__line"></div>
-          <input class="edit-form__text-field" type="text" placeholder="Чем занимаетесь?">
-          <div class="edit-form__line"></div>
-          <button class="edit-form__submit-button" type="submit">Сохранить</button>
+    <!-- block popup -->
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <form class="popup__form" name="edit-form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__text-field" name="user-name" type="text" placeholder="Ваше имя" required>
+          <input class="popup__text-field" name="user-profession" type="text" placeholder="Чем занимаетесь?" required>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
-    </section>
-    <!-- /section edit-form -->
+    </div>
+    <!-- /block popup -->
   </div>
 </body>
 

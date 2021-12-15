@@ -1,14 +1,16 @@
-.edit-form__text-field {
+.popup__text-field {
+  box-sizing: border-box;
   width: 100%;
-  padding: 0;
+  padding: 9px;
   border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
   font: 14px/17px 'Inter', 'Arial', sans-serif;
   font-weight: 400;
-  margin-bottom: 9px;
+  margin-top: 22px;
   vertical-align: bottom;
 }
 
-.edit-form__text-field::placeholder {
+.popup__text-field::placeholder {
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   line-height: 17px;
