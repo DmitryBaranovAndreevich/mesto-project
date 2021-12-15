@@ -6,10 +6,10 @@
 
 .profile__container::before {
   content: '_';
-  visibility: hidden; 
-  font-size: 0.5px; 
-  height: 100%; 
-  width: 0.1px; 
+  visibility: hidden;
+  font-size: 0.5px;
+  height: 100%;
+  width: 0.1px;
   display: grid;
   align-items: end;
 }
@@ -17,8 +17,9 @@
 @media screen and (max-width: 720px) {
   .profile__container {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr max-content 1fr;
     grid-template-areas: ". name edit";
-    margin-top: 15px;
+    margin-top: 13px;
   }
 }

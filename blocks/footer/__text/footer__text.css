@@ -3,11 +3,12 @@
   font: 18px/22px 'Inter', 'Arial', sans-serif;
   font-weight: 400;
   color: #545454;
+  margin: 0;
 }
 
 @media screen and (max-width: 720px) {
   .footer__text {
     font-size: 14px;
     line-height: 17px;
-  } 
+  }
 }
