@@ -25,10 +25,10 @@
         <img src="./images/kusto.jpg" alt="Фото лица поьлзователя." class="profile__image">
         <div class="profile__container">
           <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-          <button class="profile__button-edit" type="button"></button>
+          <button class="profile__button-edit" type="button" aria-label="Редактировать"></button>
         </div>
         <p class="profile__user-profession">Исследователь океана</p>
-        <button class="profile__button-add" type="button"></button>
+        <button class="profile__button-add" type="button" aria-label="Добавить"></button>
       </section>
       <!-- /section profile -->
 
@@ -40,7 +40,7 @@
               <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="item__image">
               <div class="item__image-title">
                 <h3 class="item__title">Карачаевск</h3>
-                <button class="item__like-button item__like-button_activ" type="button"></button>
+                <button class="item__like-button item__like-button_active" type="button"></button>
               </div>
             </article>
           </li>
@@ -102,7 +102,7 @@
     <!-- block popup -->
     <div class="popup">
       <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" name="edit-form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input class="popup__text-field" name="user-name" type="text" placeholder="Ваше имя" required>

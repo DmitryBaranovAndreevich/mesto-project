@@ -28,7 +28,7 @@
 @import url(../blocks/item/__image-title/item__image-title.css);
 @import url(../blocks/item/__title/item__title.css);
 @import url(../blocks/item/__like-button/item__like-button.css);
-@import url(../blocks/item/__like-button/_activ/item__like-button_activ.css);
+@import url(../blocks/item/__like-button/_active/item__like-button_active.css);
 /* --/section elements-- */
 
 /* --section footer-- */
