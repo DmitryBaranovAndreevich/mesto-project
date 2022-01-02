@@ -1,16 +1,6 @@
 .item__image {
-  position: relative;
   width: 282px;
   height: 282px;
   object-fit: cover;
   vertical-align: bottom;
-}
-
-.item__image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #c4c4c4;
 }

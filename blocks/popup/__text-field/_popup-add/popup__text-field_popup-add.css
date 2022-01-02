@@ -1,0 +1,7 @@
+.popup__text-field_popup-add {
+  padding-left: 0;
+ }
+
+.popup__text-field_popup-add::placeholder {
+  color: #C4C4C4;
+}
