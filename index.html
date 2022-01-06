@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="проект второго месяца обучения">
+  <meta name="description" content="проект третьего месяца обучения">
   <meta name="autor" content="Дмитрий Баранов">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
@@ -34,65 +34,11 @@
 
       <!-- section elements -->
       <section class="elements">
-        <ul class="elements__list">
-        <!-- <li class="elements__element">
-           <article class="item">
-              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Карачаевск</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="item">
-              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Гора Эльбрус</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="item">
-              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Домбай</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="item">
-              <img src="./images/elbrus.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Гора Эльбрус</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="item">
-              <img src="./images/dombai.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Домбай</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="item">
-              <img src="./images/karachaevsk.jpg" alt="Монастырь около города Карачаевск." class="item__image">
-              <div class="item__image-title">
-                <h3 class="item__title">Карачаево-Черкесия</h3>
-                <button class="item__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>-->
-        </ul>
+        <ul class="elements__list"></ul>
       </section>
       <!-- /section elements -->
     </main>
+
     <!-- section footer -->
     <footer class="footer">
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
@@ -114,30 +60,53 @@
     <!-- /block popup -->
 
     <!-- block popup формы для добавления новых карточек с фото-->
-      <div class="popup popup_function_add">
-        <div class="popup__container">
-          <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-          <form class="popup__form" name="edit-form">
-            <h2 class="popup__title">Новое место</h2>
-            <input class="popup__text-field popup__text-field_popup-add" name="user-name" type="text" placeholder="Название" required>
-            <input class="popup__text-field popup__text-field_popup-add" name="user-profession" type="text" placeholder="Ссылка на картинку" required>
-            <button class="popup__submit-button" type="submit">Создать</button>
-          </form>
-        </div>
+    <div class="popup popup_function_add">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+        <form class="popup__form" name="add-form">
+          <h2 class="popup__title">Новое место</h2>
+          <input class="popup__text-field popup__text-field_popup-add" name="user-name" type="text"
+            placeholder="Название" required>
+          <input class="popup__text-field popup__text-field_popup-add" name="user-profession" type="text"
+            placeholder="Ссылка на картинку" required>
+          <button class="popup__submit-button" type="submit">Создать</button>
+        </form>
       </div>
+    </div>
     <!-- /block popup -->
 
     <!-- block popup для просмтра фотографий на большом экране-->
     <div class="popup popup_function_image-to-big">
       <div class="popup__container popup__container_image-to-big">
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-        <img class="popup__image" src="" alt="">
+        <img class="popup__image" src="#url" alt="name">
         <p class="popup__image-name"></p>
       </div>
     </div>
     <!-- /block popup -->
   </div>
-  <script src="./scripts/index.js"></script>
+
+  <!-- заготовка для добавления новых карточек с фото -->
+  <template id="item-template">
+    <li class="elements__element">
+      <article class="item">
+        <div class="item__overlay">
+          <button class="item__button-delete"></button>
+          <img src="#url" alt="name" class="item__image">
+        </div>
+        <div class="item__image-title">
+          <h3 class="item__title">name</h3>
+          <button class="item__like-button" type="button"></button>
+        </div>
+      </article>
+    </li>
+  </template>
+  <script src="./scripts/openAndClosePopup.js"></script>
+  <script src="./scripts/popupFotoToBig.js"></script>
+  <script src="./scripts/popupEdit.js"></script>
+  <script src="./scripts/popupAdd.js"></script>
+  <script src="./scripts/addNewFotoItem.js"></script>
+  <script src="./scripts/initialCards.js"></script>
 </body>
 
 </html>

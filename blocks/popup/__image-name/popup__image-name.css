@@ -1,5 +1,7 @@
 .popup__image-name {
+  position: absolute;
   font: 12px/15px 'Inter', 'Arial', sans-serif;
   font-weight: 400;
-  margin: 10px 0 0;
+  margin: 0;
+  bottom: -25px;
 }
