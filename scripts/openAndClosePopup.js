@@ -10,18 +10,6 @@ function closePopup(popup) {
 }
 
 
-// кнопка закрыть попап
-function searchCloseButton(popup) {
-  return popup.querySelector('.popup__close-button');
-}
 
 
-// очищаем поля input от данных
-function popupFeldsSetValueToNone(popup) {
-  const popupInputFelds = popup.querySelectorAll('.popup__text-field');
-
-  for(let i = 0; i < popupInputFelds.length; i++) {
-    popupInputFelds[i].value = '';
-  }
-}
 

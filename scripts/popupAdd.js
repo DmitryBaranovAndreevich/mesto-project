@@ -1,8 +1,10 @@
 
 const popupAdd = document.querySelector('.popup_function_add');
-const closeButtonAddWindow = searchCloseButton(popupAdd);
-const createButton = popupAdd.querySelector('.popup__submit-button');
+const closeButtonAddWindow = popupAdd.querySelector('.popup__close-button');
 const addButton = userProfile.querySelector('.profile__button-add');
+const formPopupAdd = popupAdd.querySelector('.popup__form');
+const feldNameFoto = popupAdd.querySelector('.popup__text-field_name');
+const feldLinkFoto = popupAdd.querySelector('.popup__text-field_link');
 
 // открытие popap-add по нажатию на кнопку "добавить"
 addButton.addEventListener('click', function() {
@@ -12,20 +14,24 @@ addButton.addEventListener('click', function() {
 // закрытие popap-add по нажатию на кнопку "крестик"
 closeButtonAddWindow.addEventListener('click', function() {
   closePopup(popupAdd);
-  popupFeldsSetValueToNone(popupAdd);
+  feldLinkFoto.value = '';
+  feldNameFoto.value = '';
 });
 
 //добавляем новую карточку с фотографией
-createButton.addEventListener('click', function(e) {
+formPopupAdd.addEventListener('submit', function(e) {
+  const linkFoto = feldLinkFoto.value;
+  const nameFoto = feldNameFoto.value;
+  const newCardFoto = createCard();
+  
   e.preventDefault();
-  const popupInputFelds = popupAdd.querySelectorAll('.popup__text-field_popup-add');
-  const name = popupInputFelds[0].value;
-  const url = popupInputFelds[1].value;
 
-  if(url && name) {
-  addNewFotoItem(name, url);
+  newCardFoto.querySelector('.item__image').setAttribute('src', linkFoto);
+  newCardFoto.querySelector('.item__image').setAttribute('alt', nameFoto);
+  newCardFoto.querySelector('.item__title').textContent = nameFoto;
+  cardsList.prepend(newCardFoto);
+  feldLinkFoto.value = '';
+  feldNameFoto.value = '';
   closePopup(popupAdd);
-  popupFeldsSetValueToNone(popupAdd);
-  } else {closePopup(popupAdd);}
 });
 

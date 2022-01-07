@@ -51,8 +51,8 @@
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" name="edit-form">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__text-field" name="user-name" type="text" placeholder="Ваше имя" required>
-          <input class="popup__text-field" name="user-profession" type="text" placeholder="Чем занимаетесь?" required>
+          <input class="popup__text-field popup__text-field_name" name="user-name" type="text" placeholder="Ваше имя" required>
+          <input class="popup__text-field popup__text-field_about" name="user-profession" type="text" placeholder="Чем занимаетесь?" required>
           <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
@@ -65,9 +65,9 @@
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" name="add-form">
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__text-field popup__text-field_popup-add" name="user-name" type="text"
+          <input class="popup__text-field popup__text-field_popup-add popup__text-field_name" name="user-name" type="text"
             placeholder="Название" required>
-          <input class="popup__text-field popup__text-field_popup-add" name="user-profession" type="text"
+          <input class="popup__text-field popup__text-field_popup-add popup__text-field_link" name="user-profession" type="text"
             placeholder="Ссылка на картинку" required>
           <button class="popup__submit-button" type="submit">Создать</button>
         </form>
@@ -105,8 +105,7 @@
   <script src="./scripts/popupFotoToBig.js"></script>
   <script src="./scripts/popupEdit.js"></script>
   <script src="./scripts/popupAdd.js"></script>
-  <script src="./scripts/addNewFotoItem.js"></script>
+  <script src="./scripts/createCard.js"></script>
   <script src="./scripts/initialCards.js"></script>
 </body>
-
 </html>
