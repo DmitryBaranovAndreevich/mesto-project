@@ -22,14 +22,12 @@ closeButtonAddWindow.addEventListener('click', function() {
 formPopupAdd.addEventListener('submit', function(e) {
   const linkFoto = feldLinkFoto.value;
   const nameFoto = feldNameFoto.value;
-  const newCardFoto = createCard();
-  
+  const newCardFoto = createCard(nameFoto, linkFoto);
+
   e.preventDefault();
 
-  newCardFoto.querySelector('.item__image').setAttribute('src', linkFoto);
-  newCardFoto.querySelector('.item__image').setAttribute('alt', nameFoto);
-  newCardFoto.querySelector('.item__title').textContent = nameFoto;
   cardsList.prepend(newCardFoto);
+  
   feldLinkFoto.value = '';
   feldNameFoto.value = '';
   closePopup(popupAdd);
