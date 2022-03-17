@@ -2,9 +2,9 @@
 const popupAdd = document.querySelector('.popup_function_add');
 const closeButtonAddWindow = popupAdd.querySelector('.popup__close-button');
 const addButton = userProfile.querySelector('.profile__button-add');
-const formPopupAdd = popupAdd.querySelector('.popup__form');
-const feldNameFoto = popupAdd.querySelector('.popup__text-field_name');
-const feldLinkFoto = popupAdd.querySelector('.popup__text-field_link');
+const formPopupAdd = popupAdd.querySelector(validationConfig.formSelector);
+const feldNameFoto = formPopupAdd.elements.title;
+const feldLinkFoto = formPopupAdd.elements.link;
 
 // открытие popap-add по нажатию на кнопку "добавить"
 addButton.addEventListener('click', function() {
@@ -27,9 +27,8 @@ formPopupAdd.addEventListener('submit', function(e) {
   e.preventDefault();
 
   cardsList.prepend(newCardFoto);
-  
-  feldLinkFoto.value = '';
-  feldNameFoto.value = '';
+
+  formPopupAdd.reset();
   closePopup(popupAdd);
 });
 

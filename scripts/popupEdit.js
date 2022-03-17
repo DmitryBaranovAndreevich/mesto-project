@@ -3,11 +3,12 @@ const popupEdit = document.querySelector('.popup_function_edit');
 const closeButtonEditWindow = popupEdit.querySelector('.popup__close-button');
 const userProfile = document.querySelector('.profile');
 const editButton = userProfile.querySelector('.profile__button-edit');
-const formEditPopup = popupEdit.querySelector('.popup__form');
+const formEditPopup = popupEdit.querySelector(validationConfig.formSelector);
+const inputs = formEditPopup.querySelectorAll(validationConfig.inputSelector);
 const profileName = userProfile.querySelector('.profile__user-name');
 const profileProfession = userProfile.querySelector('.profile__user-profession');
-const feldNameUser = popupEdit.querySelector('.popup__text-field_name');
-const feldProfessionUser = popupEdit.querySelector('.popup__text-field_about');
+const feldNameUser = formEditPopup.elements.user;
+const feldProfessionUser = formEditPopup.elements.profession;
 
 // открытие popap-edit по нажатию на кнопку "редактировать"
 editButton.addEventListener('click', function(){
@@ -16,6 +17,7 @@ editButton.addEventListener('click', function(){
 
   feldNameUser.value = profileName.textContent;
   feldProfessionUser.value = profileProfession.textContent;
+  toggleButtonState([...inputs],popupEdit.querySelector(validationConfig.submitButtonSelector));
 });
 
 formEditPopup.addEventListener('submit', function(e) {
@@ -23,7 +25,7 @@ formEditPopup.addEventListener('submit', function(e) {
 
   profileName.textContent = feldNameUser.value;
   profileProfession.textContent = feldProfessionUser.value;
-  
+
   closePopup(popupEdit);
 })
 
