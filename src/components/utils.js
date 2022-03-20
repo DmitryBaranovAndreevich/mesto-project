@@ -1,14 +1,28 @@
+import {
+  validationConfig,
+  hideInputError,
+  toggleButtonState,
+} from './validate.js';
+
+export {
+  closePopupToClickOnOverlay,
+  pushToEsc,
+  hideErrors,
+  openPopup,
+  closePopup,
+};
+
 const body = document.querySelector('.body');
 const popups = document.querySelectorAll('.popup');
 
-body.addEventListener('click', (e) => {
-  if(e.target.classList.contains('popup')) {
-    e.target.querySelector('.popup__close-button').click();
+
+const closePopupToClickOnOverlay = (e) => {
+  if (e.target.classList.contains('popup')) {
+     e.target.querySelector('.popup__close-button').click();
   }
-});
+}
 
-
-function pushToEsc(e) {
+const pushToEsc = (e) => {
   if(e.key === 'Escape') {
     [...popups].forEach(popup => {
       if(popup.classList.contains('popup_open')) {
@@ -18,7 +32,7 @@ function pushToEsc(e) {
   }
 }
 
-function hideErrors(popup) {
+const hideErrors = (popup) => {
   const elementForm = popup.querySelector(validationConfig.formSelector);
   if (elementForm) {
     const inputList = Array.from(
@@ -31,14 +45,21 @@ function hideErrors(popup) {
 
 }
 
-function openPopup(popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_open');
   body.addEventListener('keydown', pushToEsc);
+  body.addEventListener('mousedown', closePopupToClickOnOverlay);
+  toggleButtonState(
+    Array.from(popup.querySelectorAll(validationConfig.inputSelector)),
+    popup.querySelector(validationConfig.submitButtonSelector)
+  );
 }
 
 
-function closePopup(popup) {
+const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   body.removeEventListener('keydown', pushToEsc);
+  body.removeEventListener('mousedown', closePopupToClickOnOverlay);
   hideErrors(popup);
 }
+

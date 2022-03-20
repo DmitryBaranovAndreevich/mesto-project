@@ -1,3 +1,14 @@
+export { validationConfig, enableValidation, hideInputError,toggleButtonState };
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text-field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__text-field_invalid',
+  errorClass: 'popup__input-error_active',
+};
+
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -8,8 +19,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationConfig.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', true);
   } else {
     buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
   }
 };
 
@@ -57,4 +70,4 @@ const enableValidation = () => {
 }
 
 
-enableValidation();
+

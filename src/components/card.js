@@ -1,7 +1,10 @@
+export { createCard };
+import { makeFotoToBig } from './modal.js';
+
 const itemTarget = document.querySelector('#item-template').content;
 
 // создаем новую карточку с фото
-function createCard(nameFoto, linkFoto) {
+const createCard = (nameFoto, linkFoto) => {
 const newFotoItem = itemTarget.querySelector('.elements__element').cloneNode(true);
 
 newFotoItem.querySelector('.item__image').setAttribute('src', linkFoto);
