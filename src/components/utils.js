@@ -1,5 +1,5 @@
+import {validationConfig} from './index.js';
 import {
-  validationConfig,
   hideInputError,
   toggleButtonState,
 } from './validate.js';
@@ -33,13 +33,11 @@ const pushToEsc = (e) => {
 }
 
 const hideErrors = (popup) => {
-  const elementForm = popup.querySelector(validationConfig.formSelector);
+  const elementForm = popup.querySelector('.popup__form');
   if (elementForm) {
-    const inputList = Array.from(
-      popup.querySelectorAll(validationConfig.inputSelector)
-    );
+    const inputList = Array.from(popup.querySelectorAll('.popup__text-field'));
     inputList.forEach((inputElelment) => {
-      hideInputError(elementForm, inputElelment);
+      hideInputError(elementForm, inputElelment, validationConfig);
     });
   }
 
@@ -49,10 +47,6 @@ const openPopup = (popup) => {
   popup.classList.add('popup_open');
   body.addEventListener('keydown', pushToEsc);
   body.addEventListener('mousedown', closePopupToClickOnOverlay);
-  toggleButtonState(
-    Array.from(popup.querySelectorAll(validationConfig.inputSelector)),
-    popup.querySelector(validationConfig.submitButtonSelector)
-  );
 }
 
 

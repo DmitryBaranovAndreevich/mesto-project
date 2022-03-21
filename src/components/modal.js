@@ -1,7 +1,7 @@
+import { validationConfig, cardsList } from './index.js';
 import { openPopup, closePopup } from './utils.js';
-import { validationConfig, toggleButtonState } from './validate.js';
-import {createCard } from './card.js';
-import {cardsList} from './index.js';
+import { toggleButtonState } from './validate.js';
+import { createCard } from './card.js';
 export {
   openAddPopup,
   closeAddPopup,
@@ -18,33 +18,40 @@ const userProfile = document.querySelector('.profile');
 const popupAdd = document.querySelector('.popup_function_add');
 const closeButtonAddWindow = popupAdd.querySelector('.popup__close-button');
 const addButton = userProfile.querySelector('.profile__button-add');
-const formPopupAdd = popupAdd.querySelector(validationConfig.formSelector);
+const formPopupAdd = popupAdd.querySelector('.popup__form');
 const feldNameFoto = formPopupAdd.elements.title;
 const feldLinkFoto = formPopupAdd.elements.link;
 
 const popupEdit = document.querySelector('.popup_function_edit');
 const closeButtonEditWindow = popupEdit.querySelector('.popup__close-button');
 const editButton = userProfile.querySelector('.profile__button-edit');
-const formEditPopup = popupEdit.querySelector(validationConfig.formSelector);
-const inputs = formEditPopup.querySelectorAll(validationConfig.inputSelector);
+const formEditPopup = popupEdit.querySelector('.popup__form');
+const inputs = formEditPopup.querySelectorAll('.popup__text-field');
 const profileName = userProfile.querySelector('.profile__user-name');
-const profileProfession = userProfile.querySelector('.profile__user-profession');
+const profileProfession = userProfile.querySelector(
+  '.profile__user-profession'
+);
 const feldNameUser = formEditPopup.elements.user;
 const feldProfessionUser = formEditPopup.elements.profession;
 
-
 const popupFotoToBig = document.querySelector('.popup_function_image-to-big');
 const popupFotoName = popupFotoToBig.querySelector('.popup__image-name');
-const closeButtonFotoToBig = popupFotoToBig.querySelector('.popup__close-button');
+const closeButtonFotoToBig = popupFotoToBig.querySelector(
+  '.popup__close-button'
+);
 const popupFotoBig = popupFotoToBig.querySelector('.popup__image');
-
 
 // открытие popap-add по нажатию на кнопку "добавить"
 const openAddPopup = () => {
   addButton.addEventListener('click', function () {
     openPopup(popupAdd);
+    toggleButtonState(
+      Array.from(popupAdd.querySelectorAll('.popup__text-field')),
+      popupAdd.querySelector('.popup__submit-button'),
+      validationConfig
+    );
   });
-}
+};
 
 // закрытие popap-add по нажатию на кнопку "крестик"
 const closeAddPopup = () => {
@@ -53,7 +60,7 @@ const closeAddPopup = () => {
     feldLinkFoto.value = '';
     feldNameFoto.value = '';
   });
-}
+};
 
 //добавляем новую карточку с фотографией
 const submitAddPopup = () => {
@@ -69,8 +76,7 @@ const submitAddPopup = () => {
     formPopupAdd.reset();
     closePopup(popupAdd);
   });
-}
-
+};
 
 // открытие popap-edit по нажатию на кнопку "редактировать"
 const openEditPopup = () => {
@@ -81,7 +87,8 @@ const openEditPopup = () => {
     feldProfessionUser.value = profileProfession.textContent;
     toggleButtonState(
       [...inputs],
-      popupEdit.querySelector(validationConfig.submitButtonSelector)
+      popupEdit.querySelector('.popup__submit-button'),
+      validationConfig
     );
   });
 };
@@ -103,7 +110,6 @@ const closeEditPopup = () => {
     closePopup(popupEdit);
   });
 };
-
 
 const makeFotoToBig = (e) => {
   const url = e.target.getAttribute('src');

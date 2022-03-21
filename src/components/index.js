@@ -1,4 +1,5 @@
 import '../pages/index.css';
+export { cardsList, validationConfig };
 import { enableValidation } from './validate.js';
 import {
   openAddPopup,
@@ -10,7 +11,17 @@ import {
   closePopupFotoToBig,
 } from './modal.js';
 import { createCard } from './card.js';
-export { cardsList };
+
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text-field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__text-field_invalid',
+  errorClass: 'popup__input-error_active',
+};
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -42,11 +53,10 @@ const cardsList = document.querySelector('.elements__list');
 
 initialCards.forEach((item) => {
   const newCardFoto = createCard(item.name, item.link);
-
   cardsList.prepend(newCardFoto);
 });
 
-enableValidation();
+enableValidation(validationConfig);
 
 openEditPopup();
 submitEditPopup();
