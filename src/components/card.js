@@ -1,20 +1,25 @@
 export { createCard };
-import { makeFotoToBig } from './modal.js';
+import { makeFotoToBig } from './index.js';
 
 const itemTarget = document.querySelector('#item-template').content;
+
+const setDeleteLike = (e) => {
+  e.target.classList.toggle('item__like-button_active');
+};
 
 // создаем новую карточку с фото
 const createCard = (nameFoto, linkFoto) => {
 const newFotoItem = itemTarget.querySelector('.elements__element').cloneNode(true);
+const cardImage = newFotoItem.querySelector('.item__image');
 
-newFotoItem.querySelector('.item__image').setAttribute('src', linkFoto);
-newFotoItem.querySelector('.item__image').setAttribute('alt', nameFoto);
+cardImage.setAttribute('src', linkFoto);
+cardImage.setAttribute('alt', nameFoto);
 newFotoItem.querySelector('.item__title').textContent = nameFoto;
 
   // поставить или убрать лайк  для карточки с фото
-  newFotoItem.querySelector('.item__like-button').addEventListener('click', function(e) {
-    e.target.classList.toggle('item__like-button_active');
-  });
+  newFotoItem
+    .querySelector('.item__like-button')
+    .addEventListener('click', setDeleteLike);
 
   // удаление карточки
   newFotoItem.querySelector('.item__button-delete').addEventListener('click', function (e) {

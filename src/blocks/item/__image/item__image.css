@@ -1,6 +1,10 @@
 .item__image {
+  display: block;
   width: 282px;
   height: 282px;
   object-fit: cover;
-  vertical-align: bottom;
+}
+
+.item__image:hover {
+  cursor: pointer;
 }
