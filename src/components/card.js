@@ -7,6 +7,10 @@ const setDeleteLike = (e) => {
   e.target.classList.toggle('item__like-button_active');
 };
 
+const deleteCard = (e) => {
+  e.target.closest('.elements__element').remove();
+}
+
 // создаем новую карточку с фото
 const createCard = (nameFoto, linkFoto) => {
 const newFotoItem = itemTarget.querySelector('.elements__element').cloneNode(true);
@@ -22,9 +26,7 @@ newFotoItem.querySelector('.item__title').textContent = nameFoto;
     .addEventListener('click', setDeleteLike);
 
   // удаление карточки
-  newFotoItem.querySelector('.item__button-delete').addEventListener('click', function (e) {
-    e.target.closest('.elements__element').remove();
-  });
+  newFotoItem.querySelector('.item__button-delete').addEventListener('click', deleteCard);
 
   // большое фото по клику на него
   newFotoItem.querySelector('.item__image').addEventListener('click', makeFotoToBig);
