@@ -1,44 +1,27 @@
 import '../pages/index.css';
-import { validationConfig } from './config.js';
+import { validationConfig, apiConfig } from './config.js';
 import { openPopup, closePopup} from './modal.js';
 import { enableValidation, toggleButtonState, hideErrors } from './validate.js';
-import { createCard } from './card.js';
+import { createCard, checkLikes } from './card.js';
+import { getUserInfo, getCards, editProfile, addCard } from './api.js';
 export { makeFotoToBig };
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
+
 
 const cardsList = document.querySelector('.elements__list');
 const userProfile = document.querySelector('.profile');
+const avatarContainer = userProfile.querySelector('.profile__image-container');
+const avatar = userProfile.querySelector('.profile__image');
 const popupAdd = document.querySelector('.popup_function_add');
 const closeButtonAddWindow = popupAdd.querySelector('.popup__close-button');
 const addButton = userProfile.querySelector('.profile__button-add');
 const formPopupAdd = popupAdd.querySelector('.popup__form');
 const feldNameFoto = formPopupAdd.elements.title;
 const feldLinkFoto = formPopupAdd.elements.link;
+
+const popupEditAvatar = document.querySelector('.popup_function_edit-avatar');
+const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
+const closeButtonEditAvatar = popupEditAvatar.querySelector('.popup__close-button');
+const avatarUrl = formEditAvatar.elements.avatar;
 
 const popupEdit = document.querySelector('.popup_function_edit');
 const closeButtonEditWindow = popupEdit.querySelector('.popup__close-button');
@@ -59,6 +42,35 @@ const closeButtonFotoToBig = popupFotoToBig.querySelector(
   '.popup__close-button'
 );
 
+getCards()
+  .then((cards) => {
+    cards.forEach((item) => {
+      const newCardFoto = createCard(item);
+      if (item.owner.name !== profileName.textContent) {
+        newCardFoto
+          .querySelector('.item__button-delete')
+          .setAttribute('style', 'display : none');
+      }
+
+      if (checkLikes(item.likes, profileName.textContent)) {
+        newCardFoto
+          .querySelector('.item__like-button')
+          .classList.add('item__like-button_active');
+      }
+      cardsList.prepend(newCardFoto);
+    });
+  })
+  .catch((err) => console.log(err));
+
+getUserInfo()
+  .then((user) => {
+    avatar.src = user.avatar;
+    profileName.textContent = user.name;
+    profileProfession.textContent = user.about;
+  })
+  .catch((err) => console.log(err));
+
+
 const makeFotoToBig = (e) => {
   const url = e.target.getAttribute('src');
   const name = e.target.getAttribute('alt');
@@ -71,11 +83,21 @@ const makeFotoToBig = (e) => {
   openPopup(popupFotoToBig);
 };
 
-
-initialCards.forEach((item) => {
-  const newCardFoto = createCard(item.name, item.link);
-  cardsList.prepend(newCardFoto);
+avatarContainer.addEventListener('click' , function() {
+  avatarUrl.value = '';
+  hideErrors(popupEditAvatar, validationConfig);
+  openPopup(popupEditAvatar);
+  toggleButtonState(
+    Array.from(popupEditAvatar.querySelectorAll('.popup__text-field')),
+    popupEditAvatar.querySelector('.popup__submit-button'),
+    validationConfig
+  );
 });
+
+closeButtonEditAvatar.addEventListener('click', function() {
+  closePopup(popupEditAvatar);
+})
+
 
 // открытие popap-add по нажатию на кнопку "добавить"
   addButton.addEventListener('click', function () {
@@ -97,13 +119,14 @@ initialCards.forEach((item) => {
 
 //добавляем новую карточку с фотографией
   formPopupAdd.addEventListener('submit', function (e) {
-    const linkFoto = feldLinkFoto.value;
-    const nameFoto = feldNameFoto.value;
-    const newCardFoto = createCard(nameFoto, linkFoto);
-
     e.preventDefault();
 
-    cardsList.prepend(newCardFoto);
+    addCard({ name: feldNameFoto.value, link: feldLinkFoto.value })
+    .then(card => {
+      const newCardFoto = createCard(card);
+      cardsList.prepend(newCardFoto);
+    })
+    .catch(err => console.log(err));
 
     formPopupAdd.reset();
     closePopup(popupAdd);
@@ -127,8 +150,14 @@ initialCards.forEach((item) => {
   formEditPopup.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    profileName.textContent = feldNameUser.value;
-    profileProfession.textContent = feldProfessionUser.value;
+    editProfile({ name: feldNameUser.value, about: feldProfessionUser.value })
+      .then((user) => {
+        profileName.textContent = user.name;
+        profileProfession.textContent = user.about;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     closePopup(popupEdit);
   });
@@ -145,5 +174,6 @@ initialCards.forEach((item) => {
   });
 
 enableValidation(validationConfig);
+
 
 

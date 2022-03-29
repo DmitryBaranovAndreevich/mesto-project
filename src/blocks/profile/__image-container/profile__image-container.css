@@ -1,0 +1,53 @@
+.profile__image-container {
+  max-width: 120px;
+  grid-area: image;
+  position: relative;
+  margin-right: 30px;
+}
+
+.profile__image-container:hover {
+  cursor: pointer;
+}
+
+.profile__image-container::before {
+  content: '';
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%,50%);
+  background: url(../../../images/imageEditIcon.png) no-repeat center/cover;
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.profile__image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .8);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.profile__image-container:hover:before {
+  opacity: 1;
+}
+
+.profile__image-container:hover::after {
+  opacity: 1;
+}
+
+@media screen and (max-width: 720px) {
+  .profile__image-container {
+    margin-right: 0;
+  }
+}
+/* .profile__image-container::before:hover {
+
+} */

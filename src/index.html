@@ -10,7 +10,7 @@
   <title>Mesto</title>
 </head>
 
-<body class = "body">
+<body class="body">
   <div class="page">
     <!-- header -->
     <header class="header">
@@ -21,7 +21,9 @@
     <!-- section profile -->
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/kusto.jpg')%>" alt="Фото лица пользователя." class="profile__image">
+        <div class="profile__image-container">
+          <img src="<%=require('./images/kusto.jpg')%>" alt="Фото лица пользователя." class="profile__image">
+        </div>
         <div class="profile__container">
           <h1 class="profile__user-name">Жак-Ив Кусто</h1>
           <button class="profile__button-edit" type="button" aria-label="Редактировать"></button>
@@ -50,9 +52,11 @@
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" name="edit-form" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__text-field" id="name-input" name="user" type="text" placeholder="Ваше имя" required minlength="2" maxlength="40">
+          <input class="popup__text-field" id="name-input" name="user" type="text" placeholder="Ваше имя" required
+            minlength="2" maxlength="40">
           <span class="popup__input-error name-input-error"></span>
-          <input class="popup__text-field" id="profession-input" name="profession" type="text" placeholder="Чем занимаетесь?" required minlength="2" maxlength="200">
+          <input class="popup__text-field" id="profession-input" name="profession" type="text"
+            placeholder="Чем занимаетесь?" required minlength="2" maxlength="200">
           <span class="popup__input-error profession-input-error"></span>
           <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
@@ -68,10 +72,10 @@
           <h2 class="popup__title">Новое место</h2>
           <input class="popup__text-field popup__text-field_popup-add" id="title-input" name="title" type="text"
             placeholder="Название" required minlength="2" maxlength="30">
-            <span class="popup__input-error title-input-error"></span>
+          <span class="popup__input-error title-input-error"></span>
           <input class="popup__text-field popup__text-field_popup-add" id="link-input" name="link" type="url"
             placeholder="Ссылка на картинку" required>
-            <span class="popup__input-error link-input-error" ></span>
+          <span class="popup__input-error link-input-error"></span>
           <button class="popup__submit-button" type="submit">Создать</button>
         </form>
       </div>
@@ -87,7 +91,23 @@
       </div>
     </div>
     <!-- /block popup -->
+
+    <!-- block popup для редактирования аватарки-->
+    <div class="popup popup_function_edit-avatar">
+      <div class="popup__container ">
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+        <form class="popup__form" name="edit-avatar" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input class="popup__text-field" id="edit-avatar" name="avatar" type="url" placeholder="Введите новый URL" required>
+          <span class="popup__input-error edit-avatar-error"></span>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <!-- /block popup -->
   </div>
+
+
 
   <!-- заготовка для добавления новых карточек с фото -->
   <template id="item-template">
@@ -99,10 +119,14 @@
         </div>
         <div class="item__image-title">
           <h3 class="item__title">name</h3>
-          <button class="item__like-button" type="button"></button>
+          <div class="item__like-container">
+            <button class="item__like-button" type="button"></button>
+            <p class="item__like-count">3</p>
+          </div>
         </div>
       </article>
     </li>
   </template>
 </body>
+
 </html>
