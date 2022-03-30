@@ -1,8 +1,21 @@
 export { createCard, checkLikes };
-import { makeFotoToBig } from './index.js';
+import { makeFotoToBig, popupDeleteCard, spinner } from './index.js';
 import { deleteCards, setLike, deleteLike } from './api.js';
+import { closePopup, openPopup} from './modal.js';
 
 const itemTarget = document.querySelector('#item-template').content;
+
+
+const renderLoading = (isLoading,form) => {
+  if (isLoading) {
+    spinner.classList.add('spinner_visible');
+    form.setAttribute('style','opacity: 0');
+  } else {
+    spinner.classList.remove('spinner_visible');
+    form.setAttribute('style', 'opacity: 1');
+  }
+}
+
 
 const setDeleteLike = (e) => {
   e.target.classList.toggle('item__like-button_active');
@@ -54,11 +67,19 @@ newFotoItem.querySelector('.item__like-count').textContent =
 
   // удаление карточки
   newFotoItem.querySelector('.item__button-delete').addEventListener('click', function(e) {
-    deleteCards(cardObjectFromServer._id)
-    .then(() => {
-      deleteCard(e);
-    })
-    .catch(err => console.log(err));
+    openPopup(popupDeleteCard);
+    popupDeleteCard.querySelector('.popup__form').onsubmit = function () {
+      renderLoading(true, popupDeleteCard.querySelector('.popup__form'));
+      deleteCards(cardObjectFromServer._id)
+        .then(() => {
+          deleteCard(e);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          closePopup(popupDeleteCard);
+          renderLoading(false, popupDeleteCard.querySelector('.popup__form'));
+        });
+    };
   })
 
   // большое фото по клику на него

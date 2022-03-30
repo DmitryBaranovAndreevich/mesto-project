@@ -7,6 +7,7 @@ export {
   deleteCards,
   setLike,
   deleteLike,
+  editAvatar,
 };
 
 
@@ -96,3 +97,16 @@ const deleteLike = (idCard) => {
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 };
+
+const editAvatar = (data) => {
+  return fetch(`${apiConfig.user}/avatar`, {
+    method: 'PATCH',
+    headers: apiConfig.headers,
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}

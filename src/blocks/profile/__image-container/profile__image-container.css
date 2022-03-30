@@ -1,5 +1,6 @@
 .profile__image-container {
-  max-width: 120px;
+  height: 120px;
+  width: 120px;
   grid-area: image;
   position: relative;
   margin-right: 30px;
