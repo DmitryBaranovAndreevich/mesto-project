@@ -1,9 +1,4 @@
-export {
-  closePopupToClickOnOverlay,
-  pushToEsc,
-  openPopup,
-  closePopup,
-};
+export { closePopupToClickOnOverlay, pushToEsc, openPopup, closePopup };
 
 const body = document.querySelector('.body');
 

@@ -9,7 +9,6 @@ const validationConfig = {
   errorClass: 'popup__input-error_active',
 };
 
-
 const apiConfig = {
   url: 'https://mesto.nomoreparties.co',
   cards: 'https://mesto.nomoreparties.co/v1/plus-cohort-8/cards',

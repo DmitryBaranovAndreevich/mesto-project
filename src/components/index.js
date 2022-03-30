@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import { validationConfig, apiConfig } from './config.js';
-import { openPopup, closePopup} from './modal.js';
+import { openPopup, closePopup } from './modal.js';
 import { enableValidation, toggleButtonState, hideErrors } from './validate.js';
 import { createCard, checkLikes } from './card.js';
 import {
@@ -14,9 +14,10 @@ export { makeFotoToBig, popupDeleteCard, spinner };
 
 const popupDeleteCard = document.querySelector('.popup_function_delete-card');
 const formDeleteCard = popupDeleteCard.querySelector('.popup__form');
-const closeButtonDeleteCard = popupDeleteCard.querySelector('.popup__close-button');
+const closeButtonDeleteCard = popupDeleteCard.querySelector(
+  '.popup__close-button'
+);
 const spinner = popupDeleteCard.querySelector('.spinner');
-
 
 const cardsList = document.querySelector('.elements__list');
 const userProfile = document.querySelector('.profile');
@@ -34,9 +35,13 @@ const submitButtonPopupAdd = formPopupAdd.querySelector(
 
 const popupEditAvatar = document.querySelector('.popup_function_edit-avatar');
 const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
-const closeButtonEditAvatar = popupEditAvatar.querySelector('.popup__close-button');
+const closeButtonEditAvatar = popupEditAvatar.querySelector(
+  '.popup__close-button'
+);
 const avatarUrl = formEditAvatar.elements.avatar;
-const submitButtonEditAvatar = formEditAvatar.querySelector('.popup__submit-button');
+const submitButtonEditAvatar = formEditAvatar.querySelector(
+  '.popup__submit-button'
+);
 
 const popupEdit = document.querySelector('.popup_function_edit');
 const closeButtonEditWindow = popupEdit.querySelector('.popup__close-button');
@@ -65,31 +70,26 @@ getUserInfo()
     avatar.src = user.avatar;
     profileName.textContent = user.name;
     profileProfession.textContent = user.about;
+    return getCards();
+  })
+  .then((cards) => {
+    cards.forEach((item) => {
+      const newCardFoto = createCard(item);
+      if (item.owner.name !== profileName.textContent) {
+        newCardFoto
+          .querySelector('.item__button-delete')
+          .setAttribute('style', 'display : none');
+      }
+
+      if (checkLikes(item.likes, profileName.textContent)) {
+        newCardFoto
+          .querySelector('.item__like-button')
+          .classList.add('item__like-button_active');
+      }
+      cardsList.prepend(newCardFoto);
+    });
   })
   .catch((err) => console.log(err));
-
-setTimeout(() => {
-  getCards()
-    .then((cards) => {
-      cards.forEach((item) => {
-        const newCardFoto = createCard(item);
-        if (item.owner.name !== profileName.textContent) {
-          newCardFoto
-            .querySelector('.item__button-delete')
-            .setAttribute('style', 'display : none');
-        }
-
-        if (checkLikes(item.likes, profileName.textContent)) {
-          newCardFoto
-            .querySelector('.item__like-button')
-            .classList.add('item__like-button_active');
-        }
-        cardsList.prepend(newCardFoto);
-      });
-    })
-    .catch((err) => console.log(err));
-},0);
-
 
 const makeFotoToBig = (e) => {
   const url = e.target.getAttribute('src');
@@ -104,17 +104,17 @@ const makeFotoToBig = (e) => {
 };
 
 // закрытие попапа подтверждения удаления карточки по клику на "крестик"
-closeButtonDeleteCard.addEventListener('click', function() {
+closeButtonDeleteCard.addEventListener('click', function () {
   closePopup(popupDeleteCard);
-})
+});
 
 // нажатие на подтверждение удаления
-formDeleteCard.addEventListener('submit', function(e) {
+formDeleteCard.addEventListener('submit', function (e) {
   e.preventDefault();
-})
+});
 
 // открытие popupEditAvatar по нажатию на кнопку фото пользователя
-avatarContainer.addEventListener('click' , function() {
+avatarContainer.addEventListener('click', function () {
   avatarUrl.value = '';
   hideErrors(popupEditAvatar, validationConfig);
   openPopup(popupEditAvatar);
@@ -126,108 +126,99 @@ avatarContainer.addEventListener('click' , function() {
 });
 
 // закрытие popupEditAvatar по нажатию на кнопку "крестик"
-closeButtonEditAvatar.addEventListener('click', function() {
+closeButtonEditAvatar.addEventListener('click', function () {
   closePopup(popupEditAvatar);
 });
 
 // смена аватара на странице
-formEditAvatar.addEventListener('submit', function(e) {
+formEditAvatar.addEventListener('submit', function (e) {
   e.preventDefault();
   submitButtonEditAvatar.textContent += '...';
-  editAvatar({avatar : avatarUrl.value})
-  .then(url => {
-    avatar.src = url.avatar;
-  })
-  .catch(err => console.log(err))
-  .finally(() => {
-    closePopup(popupEditAvatar);
-    submitButtonEditAvatar.textContent = 'Сохранить';
+  editAvatar({ avatar: avatarUrl.value })
+    .then((url) => {
+      avatar.src = url.avatar;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      closePopup(popupEditAvatar);
+      submitButtonEditAvatar.textContent = 'Сохранить';
+    });
 });
-})
-
 
 // открытие popap-add по нажатию на кнопку "добавить"
-  addButton.addEventListener('click', function () {
-    feldLinkFoto.value = '';
-    feldNameFoto.value = '';
-    hideErrors(popupAdd, validationConfig);
-    openPopup(popupAdd);
-    toggleButtonState(
-      Array.from(popupAdd.querySelectorAll('.popup__text-field')),
-      popupAdd.querySelector('.popup__submit-button'),
-      validationConfig
-    );
-  });
+addButton.addEventListener('click', function () {
+  feldLinkFoto.value = '';
+  feldNameFoto.value = '';
+  hideErrors(popupAdd, validationConfig);
+  openPopup(popupAdd);
+  toggleButtonState(
+    Array.from(popupAdd.querySelectorAll('.popup__text-field')),
+    popupAdd.querySelector('.popup__submit-button'),
+    validationConfig
+  );
+});
 
 // закрытие popap-add по нажатию на кнопку "крестик"
-  closeButtonAddWindow.addEventListener('click', function () {
-    closePopup(popupAdd);
-  });
+closeButtonAddWindow.addEventListener('click', function () {
+  closePopup(popupAdd);
+});
 
 //добавляем новую карточку с фотографией
-  formPopupAdd.addEventListener('submit', function (e) {
-    e.preventDefault();
-    submitButtonPopupAdd.textContent += '...';
-    addCard({ name: feldNameFoto.value, link: feldLinkFoto.value })
-    .then(card => {
+formPopupAdd.addEventListener('submit', function (e) {
+  e.preventDefault();
+  submitButtonPopupAdd.textContent += '...';
+  addCard({ name: feldNameFoto.value, link: feldLinkFoto.value })
+    .then((card) => {
       const newCardFoto = createCard(card);
       cardsList.prepend(newCardFoto);
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
     .finally(() => {
-       formPopupAdd.reset();
-        closePopup(popupAdd);
-        submitButtonPopupAdd.textContent = 'Создать';
+      formPopupAdd.reset();
+      closePopup(popupAdd);
+      submitButtonPopupAdd.textContent = 'Создать';
     });
-
-  });
+});
 
 // открытие popap-edit по нажатию на кнопку "редактировать"
-  editButton.addEventListener('click', function () {
-    hideErrors(popupEdit, validationConfig);
-    openPopup(popupEdit);
+editButton.addEventListener('click', function () {
+  hideErrors(popupEdit, validationConfig);
+  openPopup(popupEdit);
 
-    feldNameUser.value = profileName.textContent;
-    feldProfessionUser.value = profileProfession.textContent;
-    toggleButtonState(
-      [...inputs],
-      popupEdit.querySelector('.popup__submit-button'),
-      validationConfig
-    );
-  });
+  feldNameUser.value = profileName.textContent;
+  feldProfessionUser.value = profileProfession.textContent;
+  toggleButtonState(
+    [...inputs],
+    popupEdit.querySelector('.popup__submit-button'),
+    validationConfig
+  );
+});
 
-
-  formEditPopup.addEventListener('submit', function (e) {
-    e.preventDefault();
-    submitButtonEditPopup.textContent += '...';
-    editProfile({ name: feldNameUser.value, about: feldProfessionUser.value })
-      .then((user) => {
-        profileName.textContent = user.name;
-        profileProfession.textContent = user.about;
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        closePopup(popupEdit);
-        submitButtonEditPopup.textContent = 'Сохранить';
-      })
-  });
+formEditPopup.addEventListener('submit', function (e) {
+  e.preventDefault();
+  submitButtonEditPopup.textContent += '...';
+  editProfile({ name: feldNameUser.value, about: feldProfessionUser.value })
+    .then((user) => {
+      profileName.textContent = user.name;
+      profileProfession.textContent = user.about;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      closePopup(popupEdit);
+      submitButtonEditPopup.textContent = 'Сохранить';
+    });
+});
 
 // закрытие popap-edit по нажатию на кнопку "крестик"
-  closeButtonEditWindow.addEventListener('click', function () {
-    closePopup(popupEdit);
-  });
+closeButtonEditWindow.addEventListener('click', function () {
+  closePopup(popupEdit);
+});
 
-
-  closeButtonFotoToBig.addEventListener('click', function () {
-    closePopup(popupFotoToBig);
-    popupFotoName.textContent = '';
-  });
-
-
+closeButtonFotoToBig.addEventListener('click', function () {
+  closePopup(popupFotoToBig);
+  popupFotoName.textContent = '';
+});
 
 enableValidation(validationConfig);
-
-
-

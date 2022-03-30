@@ -16,7 +16,6 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   }
 };
 
-
 const showInputError = (
   formElement,
   inputElement,
@@ -45,7 +44,6 @@ const hideErrors = (popup, validationConfig) => {
     });
   }
 };
-
 
 const isValid = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
@@ -82,6 +80,3 @@ const enableValidation = (validationConfig) => {
     setEventListeners(formElement, validationConfig);
   });
 };
-
-
-
