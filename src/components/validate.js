@@ -1,5 +1,3 @@
-export { enableValidation, hideInputError, toggleButtonState, hideErrors };
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -36,9 +34,11 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
 };
 
 const hideErrors = (popup, validationConfig) => {
-  const elementForm = popup.querySelector('.popup__form');
+  const elementForm = popup.querySelector(validationConfig.formSelector);
   if (elementForm) {
-    const inputList = Array.from(popup.querySelectorAll('.popup__text-field'));
+    const inputList = Array.from(
+      popup.querySelectorAll(validationConfig.inputSelector)
+    );
     inputList.forEach((inputElelment) => {
       hideInputError(elementForm, inputElelment, validationConfig);
     });
@@ -80,3 +80,5 @@ const enableValidation = (validationConfig) => {
     setEventListeners(formElement, validationConfig);
   });
 };
+
+export { enableValidation, hideInputError, toggleButtonState, hideErrors };

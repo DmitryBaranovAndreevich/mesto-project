@@ -1,9 +1,26 @@
-export { createCard, checkLikes };
-import { makeFotoToBig, popupDeleteCard, spinner } from './index.js';
+import { popupDeleteCard, spinner } from './index.js';
 import { deleteCards, setLike, deleteLike } from './api.js';
 import { closePopup, openPopup } from './modal.js';
 
 const itemTarget = document.querySelector('#item-template').content;
+const confirmationForm = document
+  .querySelector('.popup_function_delete-card')
+  .querySelector('.popup__form');
+const popupFotoToBig = document.querySelector('.popup_function_image-to-big');
+const popupFotoBig = popupFotoToBig.querySelector('.popup__image');
+const popupFotoName = popupFotoToBig.querySelector('.popup__image-name');
+
+const makeFotoToBig = (e) => {
+  const url = e.target.getAttribute('src');
+  const name = e.target.getAttribute('alt');
+  popupFotoName.textContent = '';
+
+  popupFotoBig.setAttribute('src', url);
+  popupFotoBig.setAttribute('alt', name);
+  popupFotoName.insertAdjacentText('afterbegin', name);
+
+  openPopup(popupFotoToBig);
+};
 
 const renderLoading = (isLoading, form) => {
   if (isLoading) {
@@ -15,7 +32,7 @@ const renderLoading = (isLoading, form) => {
   }
 };
 
-const setDeleteLike = (e) => {
+const toggleLike = (e) => {
   e.target.classList.toggle('item__like-button_active');
 };
 
@@ -23,68 +40,77 @@ const deleteCard = (e) => {
   e.target.closest('.elements__element').remove();
 };
 
-const checkLikes = (arrLikes, owner) => {
+const checkLikes = (arrLikes, userId) => {
   return arrLikes.some((data) => {
-    return data.name === owner;
+    return data._id === userId;
   });
 };
 
 // создаем новую карточку с фото
-const createCard = (cardObjectFromServer) => {
+const createCard = (cardObjectFromServer, userId) => {
   const newFotoItem = itemTarget
     .querySelector('.elements__element')
     .cloneNode(true);
   const cardImage = newFotoItem.querySelector('.item__image');
   const nameFoto = cardObjectFromServer.name;
+  const likesCounter = newFotoItem.querySelector('.item__like-count');
+  const buttonDelete = newFotoItem.querySelector('.item__button-delete');
+  const likeButton = newFotoItem.querySelector('.item__like-button');
+
+  if (cardObjectFromServer.owner._id !== userId) {
+    buttonDelete.setAttribute('style', 'display : none');
+  }
+
+  if (checkLikes(cardObjectFromServer.likes, userId)) {
+    likeButton.classList.add('item__like-button_active');
+  }
 
   cardImage.setAttribute('src', cardObjectFromServer.link);
   cardImage.setAttribute('alt', nameFoto);
   newFotoItem.querySelector('.item__title').textContent = nameFoto;
-  newFotoItem.querySelector('.item__like-count').textContent =
-    cardObjectFromServer.likes.length;
+  likesCounter.textContent = cardObjectFromServer.likes.length;
 
   // поставить или убрать лайк  для карточки с фото
-  newFotoItem
-    .querySelector('.item__like-button')
-    .addEventListener('click', function (e) {
-      if (!e.target.classList.contains('item__like-button_active')) {
-        setLike(cardObjectFromServer._id).then((card) => {
-          setDeleteLike(e);
-          newFotoItem.querySelector('.item__like-count').textContent =
-            card.likes.length;
-        });
-      } else {
-        deleteLike(cardObjectFromServer._id).then((card) => {
-          setDeleteLike(e);
-          newFotoItem.querySelector('.item__like-count').textContent =
-            card.likes.length;
-        });
-      }
-    });
+  likeButton.addEventListener('click', function (e) {
+    if (!e.target.classList.contains('item__like-button_active')) {
+      setLike(cardObjectFromServer._id)
+        .then((card) => {
+          toggleLike(e);
+          likesCounter.textContent = card.likes.length;
+        })
+        .catch((err) => console.log(err));
+    } else {
+      deleteLike(cardObjectFromServer._id)
+        .then((card) => {
+          toggleLike(e);
+          likesCounter.textContent = card.likes.length;
+        })
+        .catch((err) => console.log(err));
+    }
+  });
 
   // удаление карточки
-  newFotoItem
-    .querySelector('.item__button-delete')
-    .addEventListener('click', function (e) {
-      openPopup(popupDeleteCard);
-      popupDeleteCard.querySelector('.popup__form').onsubmit = function () {
-        renderLoading(true, popupDeleteCard.querySelector('.popup__form'));
-        deleteCards(cardObjectFromServer._id)
-          .then(() => {
-            deleteCard(e);
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            closePopup(popupDeleteCard);
-            renderLoading(false, popupDeleteCard.querySelector('.popup__form'));
-          });
-      };
-    });
+  buttonDelete.addEventListener('click', function (e) {
+    openPopup(popupDeleteCard);
+    confirmationForm.onsubmit = function (event) {
+      event.preventDefault();
+      renderLoading(true, confirmationForm);
+      deleteCards(cardObjectFromServer._id)
+        .then(() => {
+          deleteCard(e);
+          closePopup(popupDeleteCard);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          renderLoading(false, confirmationForm);
+        });
+    };
+  });
 
   // большое фото по клику на него
-  newFotoItem
-    .querySelector('.item__image')
-    .addEventListener('click', makeFotoToBig);
+  cardImage.addEventListener('click', makeFotoToBig);
 
   return newFotoItem;
 };
+
+export { createCard, checkLikes };
