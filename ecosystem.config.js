@@ -15,7 +15,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: 'https://github.com/DmitryBaranovAndreevich/mesto-project.git',
       path: DEPLOY_PATH,
-      'pre-deploy-local': `npm i && npm run build && scp -vvv -Cr ./dist/* ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
+      'pre-deploy-local': `npm run build && scp -Cr ./dist/* ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
     },
   },
 };
